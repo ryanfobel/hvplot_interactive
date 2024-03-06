@@ -4,6 +4,8 @@
 
 🐍🐼📈❤️
 
+**EDIT:** this dashboard is served as a progressive web app [here](https://ryanfobel.github.io/hvplot_interactive/hvplot_interactive.html). It can be installed on a laptop, phone, etc.
+
 This repo supports the [blog post](https://sophiamyang.medium.com/the-easiest-way-to-create-an-interactive-dashboard-in-python-77440f2511d1?sk=e1ea8c40c090cdbe7689333267f73b25)
 
 **The Easiest Way to Create an Interactive Dashboard in Python. Turn Pandas pipelines into a
