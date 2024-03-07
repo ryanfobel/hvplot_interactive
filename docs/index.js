@@ -50,7 +50,7 @@ init_doc()
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[19]:
+# In[ ]:
 
 
 import panel as pn
@@ -61,7 +61,7 @@ font_size = 30
 margin = 25
 
 
-# In[20]:
+# In[ ]:
 
 
 markdown_text = """
@@ -171,62 +171,86 @@ That is so funny! 😂
 """
 
 
-# In[27]:
+# In[ ]:
 
 
-font_size_slider = pn.widgets.IntSlider(name='Font size', start=12, end=64, step=2, value=40, margin=margin, styles={"font-size": f"{font_size}px"})
-
-def get_font_size(font_size):
+def get_font_size(size):
     return {
-        'styles': {'font-size': f'{font_size}px'}
+        'styles': {'font-size': f'{size}px'}
     }
 
+font_size_slider = pn.widgets.IntSlider(name='Font size', start=12, end=64, step=2, value=font_size, margin=margin, styles={"font-size": f"{font_size}px"})
+
 irefs = pn.bind(get_font_size, font_size_slider)
+
 font_size_slider
 
 
-# In[28]:
+# In[ ]:
 
 
-width = pn.widgets.IntSlider(name='Width', start=300, end=800, step=50, value=300, margin=margin, refs=irefs)
+width = pn.widgets.IntSlider(name='Width', start=300, end=1200, step=50, value=300, margin=margin, refs=irefs)
 width
 
 
-# In[29]:
+# In[ ]:
 
 
-template = pn.template.MaterialTemplate(
-    title='Dashboard',
-    sidebar=[
-        font_size_slider,
-        width
-    ],
-    main=[
-        pn.Row(
-            pn.pane.Markdown(
-                markdown_text,
-                refs=irefs
-            ),
-            width=width,
-            margin=margin,
-        )
-    ],
-    # accent_base_color="#88d8b0",
-    # header_background="#88d8b0",
+row = pn.Row(
+    pn.pane.Markdown(
+        markdown_text,
+        refs=irefs
+    ),
+    width=width,
+    margin=margin,
 )
-# template.show()
-template.servable();
+
+tabs = pn.Tabs(("Main", row))
+tabs.append(("Configuration", pn.Column(font_size_slider, width)))
+
+
+# In[ ]:
+
+
+tabs.servable()
+
+
+# In[ ]:
+
+
+# template = pn.template.MaterialTemplate(
+#     title='Dashboard',
+#     sidebar=[
+#         font_size_slider,
+#         width
+#     ],
+#     main=[
+#         row
+#     ],
+#     # accent_base_color="#88d8b0",
+#     # header_background="#88d8b0",
+# )
+# template.servable();
+
+
+# In[ ]:
+
+
+# pn.Column(
+#     font_size_slider,
+#     width,
+#     pn.pane.Markdown(
+#         markdown_text,
+#         refs=irefs
+#     ),
+#     width=width,
+#     margin=margin,
+# ).servable();
 
 
 # Create a web app with the following command:
 # 
 # \`\`\`panel convert index.ipynb --to pyodide-worker --out docs --pwa --title Dashboard\`\`\`
-
-# In[ ]:
-
-
-
-
 
 # In[ ]:
 
