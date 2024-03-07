@@ -50,18 +50,35 @@ init_doc()
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[ ]:
+# In[47]:
 
 
 import panel as pn
 
-pn.extension()
+CSS = """
+#header {
+    height: 0;
+    padding: 0;
+    visibility: hidden;
+}
+
+.pn-busy-container {
+    visibility: hidden;
+}
+
+div.mdc-top-app-bar--fixed-adjust {
+    padding-top: 0;
+}
+
+"""
+
+pn.extension(raw_css=[CSS], design='material', template='material')
 
 font_size = 30
 margin = 25
 
 
-# In[ ]:
+# In[14]:
 
 
 markdown_text = """
@@ -171,7 +188,7 @@ That is so funny! 😂
 """
 
 
-# In[ ]:
+# In[23]:
 
 
 def get_font_size(size):
@@ -186,14 +203,14 @@ irefs = pn.bind(get_font_size, font_size_slider)
 font_size_slider
 
 
-# In[ ]:
+# In[24]:
 
 
 width = pn.widgets.IntSlider(name='Width', start=300, end=1200, step=50, value=300, margin=margin, refs=irefs)
 width
 
 
-# In[ ]:
+# In[25]:
 
 
 row = pn.Row(
@@ -204,18 +221,35 @@ row = pn.Row(
     width=width,
     margin=margin,
 )
-
-tabs = pn.Tabs(("Main", row))
+tabs = pn.Tabs(("Main", row), refs=irefs)
 tabs.append(("Configuration", pn.Column(font_size_slider, width)))
 
 
-# In[ ]:
+# In[28]:
 
 
-tabs.servable()
+tabs.servable();
 
 
-# In[ ]:
+# In[29]:
+
+
+# template = pn.template.MaterialTemplate(
+#     title='Dashboard',
+#     # sidebar=[
+#     #     font_size_slider,
+#     #     width
+#     # ],
+#     main=[
+#         tabs
+#     ],
+#     # accent_base_color="#88d8b0",
+#     # header_background="#88d8b0",
+# )
+# template.servable();
+
+
+# In[30]:
 
 
 # template = pn.template.MaterialTemplate(
@@ -233,7 +267,7 @@ tabs.servable()
 # template.servable();
 
 
-# In[ ]:
+# In[31]:
 
 
 # pn.Column(
