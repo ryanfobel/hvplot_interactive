@@ -50,20 +50,20 @@ init_doc()
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[27]:
+# In[1]:
 
 
 import panel as pn
 
 pn.extension()
 
-font_size = 64
+font_size = 13
 
 
-# In[31]:
+# In[2]:
 
 
-markdown_sample = pn.pane.Markdown("""
+markdown_text = """
 
 # Markdown Sample
 
@@ -167,22 +167,39 @@ That is so funny! 😂
 
 (See also [Copying and Pasting Emoji](https://www.markdownguide.org/extended-syntax/#copying-and-pasting-emoji))
 
-""",
-    sizing_mode='stretch_width'
-)
-
-markdown_sample
+"""
 
 
-# In[32]:
+# In[3]:
 
+
+size = pn.widgets.IntSlider(name='Font size', start=12, end=40, step=2, value=12)
+size
+
+
+# In[5]:
+
+
+def refs(size):
+    return {
+        'styles': {'font-size': f'{size}px'}
+    }
+
+def get_size(size):
+    return f"{size}"
+
+irefs = pn.bind(refs, size)
 
 template = pn.template.MaterialTemplate(
     title='Dashboard',
-    sidebar=[],
+    sidebar=[size],
     main=[
         pn.Row(
-            markdown_sample
+            pn.pane.Markdown(
+                markdown_text,
+                refs=irefs
+            ),
+            width=300
         )
     ],
     # accent_base_color="#88d8b0",
