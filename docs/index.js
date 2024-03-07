@@ -50,17 +50,17 @@ init_doc()
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[21]:
+# In[27]:
 
 
 import panel as pn
 
 pn.extension()
 
-font_size = 32
+font_size = 64
 
 
-# In[24]:
+# In[28]:
 
 
 markdown_sample = pn.pane.Markdown("""
@@ -172,7 +172,7 @@ That is so funny! 😂
 markdown_sample
 
 
-# In[25]:
+# In[29]:
 
 
 template = pn.template.MaterialTemplate(
@@ -193,12 +193,6 @@ template.servable();
 # Create a web app with the following command:
 # 
 # \`\`\`panel convert index.ipynb --to pyodide-worker --out docs --pwa --title Dashboard\`\`\`
-
-# In[26]:
-
-
-('pinfo2', 'pn.template.MaterialTemplate')
-
 
 # In[ ]:
 
