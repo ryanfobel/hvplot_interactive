@@ -73,7 +73,7 @@ init_doc()
 # !pip install panel==0.12.6 hvplot==0.7.3
 
 
-# In[ ]:
+# In[2]:
 
 
 import panel as pn
@@ -81,7 +81,7 @@ import panel as pn
 pn.extension('tabulator', sizing_mode="stretch_width")
 
 
-# In[ ]:
+# In[3]:
 
 
 import hvplot.pandas
@@ -92,7 +92,7 @@ hv.extension('bokeh')
 
 # ## Define function to determine environment
 
-# In[ ]:
+# In[4]:
 
 
 def environment():
@@ -106,7 +106,7 @@ environment()
 
 # ## Define Color Palette
 
-# In[ ]:
+# In[5]:
 
 
 PALETTE = ["#ff6f69", "#ffcc5c", "#88d8b0", ]
@@ -119,7 +119,7 @@ pn.Row(
 
 # ## Load Data
 
-# In[ ]:
+# In[6]:
 
 
 from bokeh.sampledata.autompg import autompg_clean as df
@@ -128,7 +128,7 @@ df.head()
 
 # ## Define DataFrame Pipeline
 
-# In[ ]:
+# In[7]:
 
 
 (
@@ -145,7 +145,7 @@ df.head()
 
 # ## Make DataFrame Pipeline Interactive
 
-# In[ ]:
+# In[8]:
 
 
 idf = df.interactive()
@@ -153,7 +153,7 @@ idf = df.interactive()
 
 # Define [Panel widgets](https://panel.holoviz.org/reference/index.html#widgets)
 
-# In[ ]:
+# In[9]:
 
 
 cylinders = pn.widgets.IntSlider(name='Cylinders', start=4, end=8, step=2)
@@ -171,7 +171,7 @@ yaxis = pn.widgets.RadioButtonGroup(
 
 # Combine pipeline and widgets
 
-# In[ ]:
+# In[22]:
 
 
 ipipeline = (
@@ -190,7 +190,7 @@ ipipeline.head()
 
 # ## Pipe to Table
 
-# In[ ]:
+# In[11]:
 
 
 if environment()=="server":
@@ -199,7 +199,7 @@ else:
    theme="simple"
 
 
-# In[ ]:
+# In[12]:
 
 
 itable = ipipeline.pipe(pn.widgets.Tabulator, pagination='remote', page_size=10)
@@ -210,7 +210,7 @@ itable
 
 # ## Pipe to hvplot
 
-# In[ ]:
+# In[13]:
 
 
 ihvplot = ipipeline.hvplot(x='mpg', y=yaxis, by='origin', color=PALETTE, line_width=6, height=400)
@@ -221,23 +221,43 @@ ihvplot
 # 
 # Here we use the [FastListTemplate](https://panel.holoviz.org/reference/templates/FastListTemplate.html#templates-gallery-fastlisttemplate).
 
-# In[ ]:
+# In[14]:
 
 
-template = pn.template.FastListTemplate(
+# template = pn.template.FastListTemplate(
+#     title='Interactive DataFrame Dashboards with hvplot .interactive', 
+#     sidebar=[cylinders, 'Manufacturers', mfr, 'Y axis' , yaxis],
+#     main=[ihvplot.panel(), itable.panel()],
+#     accent_base_color="#88d8b0",
+#     header_background="#88d8b0",
+# )
+# # template.show()
+# template.servable();
+
+
+# Please note that to get the Tabulator table styled nicely for dark mode you can set \`theme='fast'\` when you define the \`itable\`. It won't work in the notebook though.
+# 
+# To *serve the notebook* run \`panel serve hvplot_interactive.ipynb\`.
+
+# In[20]:
+
+
+template = pn.template.BootstrapTemplate(
     title='Interactive DataFrame Dashboards with hvplot .interactive', 
     sidebar=[cylinders, 'Manufacturers', mfr, 'Y axis' , yaxis],
     main=[ihvplot.panel(), itable.panel()],
-    accent_base_color="#88d8b0",
+    # accent_base_color="#88d8b0",
     header_background="#88d8b0",
 )
 # template.show()
 template.servable();
 
 
-# Please note that to get the Tabulator table styled nicely for dark mode you can set \`theme='fast'\` when you define the \`itable\`. It won't work in the notebook though.
-# 
-# To *serve the notebook* run \`panel serve hvplot_interactive.ipynb\`.
+# In[ ]:
+
+
+
+
 
 
 await write_doc()

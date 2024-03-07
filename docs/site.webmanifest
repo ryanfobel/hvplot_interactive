@@ -1,7 +1,7 @@
 {
-  "name": "hvplot_interactive",
-  "short_name": "hvplot_interactive",
-  "start_url": "hvplot_interactive.html",
+  "name": "dashboard",
+  "short_name": "dashboard",
+  "start_url": "index.html",
   "icons": [
     {
       "src": "images/icon-vector.svg",

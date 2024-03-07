@@ -1,5 +1,5 @@
-const appName = 'hvplot_interactive'
-const appCacheName = 'hvplot_interactive-86c81c52943e4e83b2ac3812ca2e7386';
+const appName = 'dashboard'
+const appCacheName = 'dashboard-5cc56501a9ec42928c72cc645f59e333';
 
 const preCacheFiles = ['images/favicon.ico', 'images/icon-vector.svg', 'images/icon-32x32.png', 'images/icon-192x192.png', 'images/icon-512x512.png', 'images/apple-touch-icon.png', 'images/index_background.png'];
 
