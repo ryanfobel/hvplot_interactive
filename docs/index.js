@@ -50,18 +50,18 @@ init_doc()
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[4]:
+# In[8]:
 
 
 import panel as pn
 
-#pn.extension('mathjax')
+pn.extension('mathjax')
 
 
-# In[5]:
+# In[9]:
 
 
-sample = pn.pane.Markdown("""
+markdown_sample = pn.pane.Markdown("""
 
 # Markdown Sample
 
@@ -167,16 +167,26 @@ That is so funny! 😂
 
 """, width=500)
 
-pn.Row(
-    sample
-).servable()
+markdown_sample
 
 
-# In[ ]:
+# In[10]:
 
 
+template = pn.template.BootstrapTemplate(
+    title='Dashboard',
+    sidebar=[],
+    main=[markdown_sample],
+    # accent_base_color="#88d8b0",
+    header_background="#88d8b0",
+)
+# template.show()
+template.servable();
 
 
+# Create a web app with the following command:
+# 
+# \`\`\`panel convert index.ipynb --to pyodide-worker --out docs --pwa --title demo\`\`\`
 
 
 await write_doc()
