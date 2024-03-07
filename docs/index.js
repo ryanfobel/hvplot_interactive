@@ -60,7 +60,7 @@ pn.extension()
 font_size = 64
 
 
-# In[28]:
+# In[31]:
 
 
 markdown_sample = pn.pane.Markdown("""
@@ -167,12 +167,14 @@ That is so funny! 😂
 
 (See also [Copying and Pasting Emoji](https://www.markdownguide.org/extended-syntax/#copying-and-pasting-emoji))
 
-""", width=400, styles={"font-size": f"{font_size}px"})
+""",
+    sizing_mode='stretch_width'
+)
 
 markdown_sample
 
 
-# In[29]:
+# In[32]:
 
 
 template = pn.template.MaterialTemplate(
