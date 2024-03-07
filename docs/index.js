@@ -50,7 +50,7 @@ init_doc()
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[60]:
+# In[69]:
 
 
 import panel as pn
@@ -75,11 +75,11 @@ div.mdc-top-app-bar--fixed-adjust {
 # pn.extension(raw_css=[CSS], design='material', template='material')
 pn.extension(raw_css=[CSS])
 
-font_size = 30
-margin = 25
+font_size = 44
+margin = 50
 
 
-# In[61]:
+# In[70]:
 
 
 markdown_text = """
@@ -189,7 +189,7 @@ That is so funny! 😂
 """
 
 
-# In[62]:
+# In[71]:
 
 
 def get_font_size(size):
@@ -204,14 +204,14 @@ irefs = pn.bind(get_font_size, font_size_slider)
 font_size_slider
 
 
-# In[63]:
+# In[72]:
 
 
-width = pn.widgets.IntSlider(name='Width', start=300, end=1200, step=50, value=300, margin=margin, refs=irefs)
+width = pn.widgets.IntSlider(name='Width', start=300, end=1200, step=50, value=800, margin=margin, refs=irefs)
 width
 
 
-# In[64]:
+# In[73]:
 
 
 row = pn.Row(
@@ -226,13 +226,13 @@ tabs = pn.Tabs(("Main", row), refs=irefs)
 tabs.append(("Configuration", pn.Column(font_size_slider, width)))
 
 
-# In[65]:
+# In[74]:
 
 
 # tabs.servable();
 
 
-# In[66]:
+# In[75]:
 
 
 template = pn.template.MaterialTemplate(
@@ -250,7 +250,7 @@ template = pn.template.MaterialTemplate(
 template.servable();
 
 
-# In[67]:
+# In[76]:
 
 
 # template = pn.template.MaterialTemplate(
@@ -268,7 +268,7 @@ template.servable();
 # template.servable();
 
 
-# In[68]:
+# In[77]:
 
 
 # pn.Column(
@@ -286,18 +286,6 @@ template.servable();
 # Create a web app with the following command:
 # 
 # \`\`\`panel convert index.ipynb --to pyodide-worker --out docs --pwa --title Dashboard\`\`\`
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
 
 
 await write_doc()
