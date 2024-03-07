@@ -57,10 +57,10 @@ import panel as pn
 
 pn.extension()
 
-font_size = 20
+font_size = 32
 
 
-# In[22]:
+# In[24]:
 
 
 markdown_sample = pn.pane.Markdown("""
@@ -167,12 +167,12 @@ That is so funny! 😂
 
 (See also [Copying and Pasting Emoji](https://www.markdownguide.org/extended-syntax/#copying-and-pasting-emoji))
 
-""", width=300, styles={"font-size": f"{font_size}px"})
+""", width=400, styles={"font-size": f"{font_size}px"})
 
 markdown_sample
 
 
-# In[23]:
+# In[25]:
 
 
 template = pn.template.MaterialTemplate(
@@ -193,6 +193,12 @@ template.servable();
 # Create a web app with the following command:
 # 
 # \`\`\`panel convert index.ipynb --to pyodide-worker --out docs --pwa --title Dashboard\`\`\`
+
+# In[26]:
+
+
+('pinfo2', 'pn.template.MaterialTemplate')
+
 
 # In[ ]:
 
