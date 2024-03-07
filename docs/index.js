@@ -50,17 +50,18 @@ init_doc()
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
+# In[19]:
 
 
 import panel as pn
 
 pn.extension()
 
-font_size = 13
+font_size = 30
+margin = 25
 
 
-# In[2]:
+# In[20]:
 
 
 markdown_text = """
@@ -170,34 +171,34 @@ That is so funny! 😂
 """
 
 
-# In[8]:
+# In[27]:
 
 
-font_size = pn.widgets.IntSlider(name='Font size', start=12, end=64, step=2, value=40)
-font_size
-
-
-# In[11]:
-
-
-width = pn.widgets.IntSlider(name='Width', start=300, end=800, step=50, value=300)
-width
-
-
-# In[15]:
-
+font_size_slider = pn.widgets.IntSlider(name='Font size', start=12, end=64, step=2, value=40, margin=margin, styles={"font-size": f"{font_size}px"})
 
 def get_font_size(font_size):
     return {
         'styles': {'font-size': f'{font_size}px'}
     }
 
-irefs = pn.bind(get_font_size, font_size)
+irefs = pn.bind(get_font_size, font_size_slider)
+font_size_slider
+
+
+# In[28]:
+
+
+width = pn.widgets.IntSlider(name='Width', start=300, end=800, step=50, value=300, margin=margin, refs=irefs)
+width
+
+
+# In[29]:
+
 
 template = pn.template.MaterialTemplate(
     title='Dashboard',
     sidebar=[
-        font_size,
+        font_size_slider,
         width
     ],
     main=[
@@ -206,7 +207,8 @@ template = pn.template.MaterialTemplate(
                 markdown_text,
                 refs=irefs
             ),
-            width=width
+            width=width,
+            margin=margin,
         )
     ],
     # accent_base_color="#88d8b0",
