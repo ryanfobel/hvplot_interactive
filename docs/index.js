@@ -50,15 +50,25 @@ init_doc()
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[8]:
+# In[47]:
 
 
 import panel as pn
 
-pn.extension('mathjax')
+font_size = 20
+
+CSS = """
+:host {{
+    font-size: var(--font-size, 13px);
+    --font-size: {font_size}px;
+}}
+
+"""
+
+pn.extension(raw_css=[CSS])
 
 
-# In[9]:
+# In[48]:
 
 
 markdown_sample = pn.pane.Markdown("""
@@ -165,20 +175,22 @@ That is so funny! 😂
 
 (See also [Copying and Pasting Emoji](https://www.markdownguide.org/extended-syntax/#copying-and-pasting-emoji))
 
-""", width=500)
+""", width=300)
 
 markdown_sample
 
 
-# In[10]:
+# In[49]:
 
 
-template = pn.template.BootstrapTemplate(
+template = pn.template.MaterialTemplate(
     title='Dashboard',
     sidebar=[],
-    main=[markdown_sample],
+    main=[
+        markdown_sample
+    ],
     # accent_base_color="#88d8b0",
-    header_background="#88d8b0",
+    # header_background="#88d8b0",
 )
 # template.show()
 template.servable();
@@ -186,7 +198,13 @@ template.servable();
 
 # Create a web app with the following command:
 # 
-# \`\`\`panel convert index.ipynb --to pyodide-worker --out docs --pwa --title demo\`\`\`
+# \`\`\`panel convert index.ipynb --to pyodide-worker --out docs --pwa --title Dashboard\`\`\`
+
+# In[ ]:
+
+
+
+
 
 
 await write_doc()
