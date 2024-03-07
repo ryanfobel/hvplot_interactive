@@ -50,25 +50,17 @@ init_doc()
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[47]:
+# In[21]:
 
 
 import panel as pn
 
+pn.extension()
+
 font_size = 20
 
-CSS = """
-:host {{
-    font-size: var(--font-size, 13px);
-    --font-size: {font_size}px;
-}}
 
-"""
-
-pn.extension(raw_css=[CSS])
-
-
-# In[48]:
+# In[22]:
 
 
 markdown_sample = pn.pane.Markdown("""
@@ -175,19 +167,21 @@ That is so funny! 😂
 
 (See also [Copying and Pasting Emoji](https://www.markdownguide.org/extended-syntax/#copying-and-pasting-emoji))
 
-""", width=300)
+""", width=300, styles={"font-size": f"{font_size}px"})
 
 markdown_sample
 
 
-# In[49]:
+# In[23]:
 
 
 template = pn.template.MaterialTemplate(
     title='Dashboard',
     sidebar=[],
     main=[
-        markdown_sample
+        pn.Row(
+            markdown_sample
+        )
     ],
     # accent_base_color="#88d8b0",
     # header_background="#88d8b0",
