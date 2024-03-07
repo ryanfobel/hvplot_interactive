@@ -170,36 +170,43 @@ That is so funny! 😂
 """
 
 
-# In[3]:
+# In[8]:
 
 
-size = pn.widgets.IntSlider(name='Font size', start=12, end=40, step=2, value=12)
-size
+font_size = pn.widgets.IntSlider(name='Font size', start=12, end=64, step=2, value=40)
+font_size
 
 
-# In[5]:
+# In[11]:
 
 
-def refs(size):
+width = pn.widgets.IntSlider(name='Width', start=300, end=800, step=50, value=300)
+width
+
+
+# In[15]:
+
+
+def get_font_size(font_size):
     return {
-        'styles': {'font-size': f'{size}px'}
+        'styles': {'font-size': f'{font_size}px'}
     }
 
-def get_size(size):
-    return f"{size}"
-
-irefs = pn.bind(refs, size)
+irefs = pn.bind(get_font_size, font_size)
 
 template = pn.template.MaterialTemplate(
     title='Dashboard',
-    sidebar=[size],
+    sidebar=[
+        font_size,
+        width
+    ],
     main=[
         pn.Row(
             pn.pane.Markdown(
                 markdown_text,
                 refs=irefs
             ),
-            width=300
+            width=width
         )
     ],
     # accent_base_color="#88d8b0",
@@ -212,6 +219,12 @@ template.servable();
 # Create a web app with the following command:
 # 
 # \`\`\`panel convert index.ipynb --to pyodide-worker --out docs --pwa --title Dashboard\`\`\`
+
+# In[ ]:
+
+
+
+
 
 # In[ ]:
 
