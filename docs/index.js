@@ -50,7 +50,7 @@ init_doc()
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
+# In[6]:
 
 
 import panel as pn
@@ -75,11 +75,9 @@ CSS = f"""
     .bk-btn-group > .bk-btn {{
         font-size: {font_size}px;
         background: none!important;
-        border: none;
+        border: none!important;
         padding: 0!important;
-        text-decoration: underline;
         cursor: pointer;
-        
     }}
 """
 
@@ -242,7 +240,7 @@ That is so funny! 😂
 """
 
 
-# In[3]:
+# In[12]:
 
 
 row = pn.Row(
@@ -253,21 +251,21 @@ row = pn.Row(
 )
 
 
-# In[4]:
+# In[13]:
 
 
-p1 = pn.widgets.Button(name="Page 1", button_type="light", button_style="solid")
-p2 = pn.widgets.Button(name="Page 2", button_type="light", button_style="solid")
+p1_button = pn.widgets.Button(name="Page 1", button_type="light", button_style="solid")
+p2_button = pn.widgets.Button(name="Page 2", button_type="light", button_style="solid")
 
 
-# In[5]:
+# In[25]:
 
 
 if hide_header:
     sidebar = []
 else:
     sidebar=[
-        p1, p2
+        p1_button, p2_button
     ]
 
 template = pn.template.MaterialTemplate(
@@ -280,6 +278,22 @@ template = pn.template.MaterialTemplate(
     # accent_base_color="#88d8b0",
     # header_background="#88d8b0",
 )
+
+content = {
+    "Page 1": pn.pane.Markdown(
+        markdown_text
+    ),
+    "Page 2": pn.pane.Markdown(
+        "Page 2"
+    ),
+}
+
+def handle_page_change(event):
+    template.main[0][0] = content[event.obj.name]
+
+p1_button.on_click(handle_page_change)
+p2_button.on_click(handle_page_change)
+
 template.servable();
 
 
