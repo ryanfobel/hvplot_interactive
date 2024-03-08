@@ -50,7 +50,7 @@ init_doc()
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[105]:
+# In[127]:
 
 
 import panel as pn
@@ -78,14 +78,27 @@ if hide_header:
     """
 else:
     CSS = f"""
+    header#header {{
+        height: 100px;
+    }}
+
+    :host {{
+        line-height: 100px;
+    }}
+
+    div.mdc-top-app-bar__row {{
+        min-height: 100px;
+    }}
+    
     a.title {{
         font-size: {font_size}px;
+        pointer-events: none;
     }}
 
     button.mdc-icon-button {{
-        font-size: {font_size}px;
-        height: 70px;
-        width: 70px;
+        font-size: 50px;
+        height: 100px;
+        width: 150px;
     }}
     """
 
@@ -93,7 +106,7 @@ else:
 pn.extension(raw_css=[CSS])
 
 
-# In[96]:
+# In[122]:
 
 
 markdown_text = """
@@ -203,7 +216,7 @@ That is so funny! 😂
 """
 
 
-# In[97]:
+# In[123]:
 
 
 def get_font_size(size):
@@ -218,14 +231,14 @@ irefs = pn.bind(get_font_size, font_size_slider)
 font_size_slider
 
 
-# In[98]:
+# In[124]:
 
 
 width = pn.widgets.IntSlider(name='Width', start=300, end=1200, step=50, value=800, margin=margin, refs=irefs)
 width
 
 
-# In[99]:
+# In[125]:
 
 
 row = pn.Row(
@@ -240,7 +253,7 @@ tabs = pn.Tabs(("Main", row), refs=irefs)
 tabs.append(("Configuration", pn.Column(font_size_slider, width)))
 
 
-# In[100]:
+# In[126]:
 
 
 if hide_header:
