@@ -57,6 +57,7 @@ import panel as pn
 
 font_size = 44
 margin = 25
+header_height = 100
 hide_header = False
 
 if hide_header:
@@ -78,7 +79,7 @@ if hide_header:
 else:
     CSS = f"""
     header#header {{
-        height: 100px;
+        height: {header_height}px;
     }}
 
     :host {{
@@ -87,11 +88,18 @@ else:
     }}
 
     div.mdc-top-app-bar__row {{
-        min-height: 100px;
+        min-height: {header_height}px;
+    }}
+
+    main.main-content {{
+        position: relative;
+        top: 25px;
     }}
     
     div.mdc-drawer__content {{
         margin: {margin}px;
+        position: relative;
+        top: 12px;
     }}
 
     a.title {{
@@ -100,9 +108,9 @@ else:
     }}
 
     button.mdc-icon-button {{
-        font-size: 50px;
-        height: 100px;
-        width: 150px;
+        font-size: {header_height / 2}px;
+        height: {header_height}px;
+        width: {header_height * 1.5}px;
     }}
     """
 
