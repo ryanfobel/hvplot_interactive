@@ -50,7 +50,7 @@ init_doc()
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[127]:
+# In[1]:
 
 
 import panel as pn
@@ -83,7 +83,8 @@ else:
     }}
 
     :host {{
-        line-height: 100px;
+        line-height: 1.4;
+        margin: {margin}px;
     }}
 
     div.mdc-top-app-bar__row {{
@@ -106,7 +107,7 @@ else:
 pn.extension(raw_css=[CSS])
 
 
-# In[122]:
+# In[2]:
 
 
 markdown_text = """
@@ -216,7 +217,7 @@ That is so funny! 😂
 """
 
 
-# In[123]:
+# In[3]:
 
 
 def get_font_size(size):
@@ -231,14 +232,14 @@ irefs = pn.bind(get_font_size, font_size_slider)
 font_size_slider
 
 
-# In[124]:
+# In[4]:
 
 
 width = pn.widgets.IntSlider(name='Width', start=300, end=1200, step=50, value=800, margin=margin, refs=irefs)
 width
 
 
-# In[125]:
+# In[5]:
 
 
 row = pn.Row(
@@ -253,7 +254,7 @@ tabs = pn.Tabs(("Main", row), refs=irefs)
 tabs.append(("Configuration", pn.Column(font_size_slider, width)))
 
 
-# In[126]:
+# In[7]:
 
 
 if hide_header:
@@ -270,6 +271,7 @@ template = pn.template.MaterialTemplate(
     main=[
         tabs
     ],
+    sidebar_width=400,
     # accent_base_color="#88d8b0",
     # header_background="#88d8b0",
 )
@@ -279,18 +281,6 @@ template.servable();
 # Create a web app with the following command:
 # 
 # \`\`\`panel convert index.ipynb --to pyodide-worker --out docs --pwa --title Dashboard\`\`\`
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
 
 
 await write_doc()
