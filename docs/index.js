@@ -56,7 +56,7 @@ init_doc()
 import panel as pn
 
 font_size = 44
-margin = 50
+margin = 25
 hide_header = False
 
 if hide_header:
@@ -74,7 +74,6 @@ if hide_header:
     div.mdc-top-app-bar--fixed-adjust {
         padding-top: 0;
     }
-    
     """
 else:
     CSS = f"""
@@ -91,6 +90,10 @@ else:
         min-height: 100px;
     }}
     
+    div.mdc-drawer__content {{
+        margin: {margin}px;
+    }}
+
     a.title {{
         font-size: {font_size}px;
         pointer-events: none;
@@ -248,13 +251,12 @@ row = pn.Row(
         refs=irefs
     ),
     width=width,
-    margin=margin,
 )
 tabs = pn.Tabs(("Main", row), refs=irefs)
 tabs.append(("Configuration", pn.Column(font_size_slider, width)))
 
 
-# In[7]:
+# In[6]:
 
 
 if hide_header:
@@ -281,6 +283,12 @@ template.servable();
 # Create a web app with the following command:
 # 
 # \`\`\`panel convert index.ipynb --to pyodide-worker --out docs --pwa --title Dashboard\`\`\`
+
+# In[ ]:
+
+
+
+
 
 
 await write_doc()
