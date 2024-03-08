@@ -240,7 +240,7 @@ That is so funny! 😂
 """
 
 
-# In[18]:
+# In[23]:
 
 
 recipe = """
@@ -253,7 +253,7 @@ recipe = """
 * 1.25g instant yeast
 * 375g water, cool (15.5C)
 
-![bread](/docs/images/bread.jpg)
+![bread](https://raw.githubusercontent.com/ryanfobel/hvplot_interactive/main/docs/images/bread.jpg)
 
 ## Instructions
 1. Pre-heat dutch oven to 500F.

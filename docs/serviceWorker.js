@@ -1,5 +1,5 @@
 const appName = 'demo'
-const appCacheName = 'demo-e807ff5cda2948d78e665666df7daa57';
+const appCacheName = 'demo-37008b95f1654326814f0304140e3e4b';
 
 const preCacheFiles = ['images/favicon.ico', 'images/icon-vector.svg', 'images/icon-32x32.png', 'images/icon-192x192.png', 'images/icon-512x512.png', 'images/apple-touch-icon.png', 'images/index_background.png'];
 
