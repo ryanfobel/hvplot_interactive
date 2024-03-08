@@ -50,7 +50,7 @@ init_doc()
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[6]:
+# In[1]:
 
 
 import panel as pn
@@ -240,7 +240,29 @@ That is so funny! 😂
 """
 
 
-# In[12]:
+# In[17]:
+
+
+recipe = """
+# Bread
+
+## Ingredients
+
+* 500g white bread flour
+* 10g salt
+* 1.25g instant yeast
+* 375g water, cool (15.5C)
+
+![bread](/docs/images/bread.jpg)
+
+## Instructions
+1. Pre-heat dutch oven to 500F.
+2. Bake for 30 min.
+3. Remove the lid and bake for another 20 minutes.
+"""
+
+
+# In[9]:
 
 
 row = pn.Row(
@@ -251,21 +273,29 @@ row = pn.Row(
 )
 
 
-# In[13]:
+# In[14]:
 
 
-p1_button = pn.widgets.Button(name="Page 1", button_type="light", button_style="solid")
-p2_button = pn.widgets.Button(name="Page 2", button_type="light", button_style="solid")
+content = {
+    "Markdown sample": pn.pane.Markdown(
+        markdown_text
+    ),
+    "White bread": pn.pane.Markdown(
+        recipe
+    ),
+}
+
+buttons = [pn.widgets.Button(name=k, button_type="light", button_style="solid") for k in content.keys()]
 
 
-# In[25]:
+# In[16]:
 
 
 if hide_header:
     sidebar = []
 else:
     sidebar=[
-        p1_button, p2_button
+        *buttons
     ]
 
 template = pn.template.MaterialTemplate(
@@ -274,25 +304,16 @@ template = pn.template.MaterialTemplate(
     main=[
         row
     ],
-    sidebar_width=400,
+    sidebar_width=600,
     # accent_base_color="#88d8b0",
     # header_background="#88d8b0",
 )
 
-content = {
-    "Page 1": pn.pane.Markdown(
-        markdown_text
-    ),
-    "Page 2": pn.pane.Markdown(
-        "Page 2"
-    ),
-}
-
 def handle_page_change(event):
     template.main[0][0] = content[event.obj.name]
 
-p1_button.on_click(handle_page_change)
-p2_button.on_click(handle_page_change)
+for b in buttons:
+    b.on_click(handle_page_change)
 
 template.servable();
 
