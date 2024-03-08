@@ -50,7 +50,7 @@ init_doc()
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
+# In[7]:
 
 
 import panel as pn
@@ -118,7 +118,7 @@ else:
 pn.extension(raw_css=[CSS])
 
 
-# In[2]:
+# In[8]:
 
 
 markdown_text = """
@@ -228,7 +228,7 @@ That is so funny! 😂
 """
 
 
-# In[3]:
+# In[9]:
 
 
 def get_font_size(size):
@@ -243,14 +243,14 @@ irefs = pn.bind(get_font_size, font_size_slider)
 font_size_slider
 
 
-# In[4]:
+# In[10]:
 
 
 width = pn.widgets.IntSlider(name='Width', start=300, end=1200, step=50, value=800, margin=margin, refs=irefs)
 width
 
 
-# In[5]:
+# In[11]:
 
 
 row = pn.Row(
@@ -264,7 +264,7 @@ tabs = pn.Tabs(("Main", row), refs=irefs)
 tabs.append(("Configuration", pn.Column(font_size_slider, width)))
 
 
-# In[6]:
+# In[12]:
 
 
 if hide_header:
