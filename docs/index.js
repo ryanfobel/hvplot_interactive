@@ -50,7 +50,7 @@ init_doc()
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[7]:
+# In[1]:
 
 
 import panel as pn
@@ -60,8 +60,32 @@ margin = 25
 header_height = 100
 hide_header = False
 
+CSS = f"""
+    :host {{
+        line-height: 1.4;
+        font-size: {font_size}px;
+        margin: {margin}px;
+    }}
+
+    a.title {{
+        font-size: {font_size}px;
+        pointer-events: none;
+    }}
+
+    .bk-btn-group > .bk-btn {{
+        font-size: {font_size}px;
+        background: none!important;
+        border: none;
+        padding: 0!important;
+        text-decoration: underline;
+        cursor: pointer;
+        
+    }}
+"""
+
+
 if hide_header:
-    CSS = """
+    CSS += """
     #header {
         height: 0;
         padding: 0;
@@ -77,14 +101,9 @@ if hide_header:
     }
     """
 else:
-    CSS = f"""
+    CSS += f"""
     header#header {{
         height: {header_height}px;
-    }}
-
-    :host {{
-        line-height: 1.4;
-        margin: {margin}px;
     }}
 
     div.mdc-top-app-bar__row {{
@@ -102,11 +121,6 @@ else:
         top: 12px;
     }}
 
-    a.title {{
-        font-size: {font_size}px;
-        pointer-events: none;
-    }}
-
     button.mdc-icon-button {{
         font-size: {header_height / 2}px;
         height: {header_height}px;
@@ -118,7 +132,7 @@ else:
 pn.extension(raw_css=[CSS])
 
 
-# In[8]:
+# In[2]:
 
 
 markdown_text = """
@@ -228,58 +242,39 @@ That is so funny! 😂
 """
 
 
-# In[9]:
-
-
-def get_font_size(size):
-    return {
-        'styles': {'font-size': f'{size}px'}
-    }
-
-font_size_slider = pn.widgets.IntSlider(name='Font size', start=12, end=64, step=2, value=font_size, margin=margin, styles={"font-size": f"{font_size}px"})
-
-irefs = pn.bind(get_font_size, font_size_slider)
-
-font_size_slider
-
-
-# In[10]:
-
-
-width = pn.widgets.IntSlider(name='Width', start=300, end=1200, step=50, value=800, margin=margin, refs=irefs)
-width
-
-
-# In[11]:
+# In[3]:
 
 
 row = pn.Row(
     pn.pane.Markdown(
         markdown_text,
-        refs=irefs
     ),
-    width=width,
+    width=800,
 )
-tabs = pn.Tabs(("Main", row), refs=irefs)
-tabs.append(("Configuration", pn.Column(font_size_slider, width)))
 
 
-# In[12]:
+# In[4]:
+
+
+p1 = pn.widgets.Button(name="Page 1", button_type="light", button_style="solid")
+p2 = pn.widgets.Button(name="Page 2", button_type="light", button_style="solid")
+
+
+# In[5]:
 
 
 if hide_header:
     sidebar = []
 else:
     sidebar=[
-        font_size_slider,
-        width
+        p1, p2
     ]
 
 template = pn.template.MaterialTemplate(
     title='Dashboard',
     sidebar=sidebar,
     main=[
-        tabs
+        row
     ],
     sidebar_width=400,
     # accent_base_color="#88d8b0",
