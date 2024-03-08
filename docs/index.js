@@ -240,7 +240,7 @@ That is so funny! 😂
 """
 
 
-# In[17]:
+# In[18]:
 
 
 recipe = """
@@ -262,7 +262,7 @@ recipe = """
 """
 
 
-# In[9]:
+# In[19]:
 
 
 row = pn.Row(
@@ -277,10 +277,10 @@ row = pn.Row(
 
 
 content = {
-    "Markdown sample": pn.pane.Markdown(
+    "Home": pn.pane.Markdown(
         markdown_text
     ),
-    "White bread": pn.pane.Markdown(
+    "White bread recipe": pn.pane.Markdown(
         recipe
     ),
 }
@@ -288,21 +288,34 @@ content = {
 buttons = [pn.widgets.Button(name=k, button_type="light", button_style="solid") for k in content.keys()]
 
 
-# In[16]:
+# In[22]:
 
+
+close_sizebar_script = f"""<script>
+    var drawer = mdc.drawer.MDCDrawer.attachTo(document.querySelector('.mdc-drawer'));
+    drawer.open = false;
+</script>
+"""
+
+html_scripts = pn.pane.HTML(close_sizebar_script)
+
+def close_sidebar():
+    html_scripts.object = ""
+    html_scripts.object = close_sizebar_script
 
 if hide_header:
     sidebar = []
 else:
     sidebar=[
-        *buttons
+        *buttons,
     ]
 
 template = pn.template.MaterialTemplate(
     title='Dashboard',
     sidebar=sidebar,
     main=[
-        row
+        row,
+        html_scripts
     ],
     sidebar_width=600,
     # accent_base_color="#88d8b0",
@@ -311,6 +324,7 @@ template = pn.template.MaterialTemplate(
 
 def handle_page_change(event):
     template.main[0][0] = content[event.obj.name]
+    close_sidebar()
 
 for b in buttons:
     b.on_click(handle_page_change)
@@ -321,12 +335,6 @@ template.servable();
 # Create a web app with the following command:
 # 
 # \`\`\`panel convert index.ipynb --to pyodide-worker --out docs --pwa --title Dashboard\`\`\`
-
-# In[ ]:
-
-
-
-
 
 
 await write_doc()
