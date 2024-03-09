@@ -50,7 +50,7 @@ init_doc()
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[1]:
+# In[25]:
 
 
 import panel as pn
@@ -77,7 +77,10 @@ CSS = f"""
         background: none!important;
         border: none!important;
         padding: 0!important;
-        cursor: pointer;
+    }}
+
+    .pn-busy-container {{
+        visibility: hidden;
     }}
 """
 
@@ -89,11 +92,7 @@ if hide_header:
         padding: 0;
         visibility: hidden;
     }
-    
-    .pn-busy-container {
-        visibility: hidden;
-    }
-    
+   
     div.mdc-top-app-bar--fixed-adjust {
         padding-top: 0;
     }
@@ -130,7 +129,7 @@ else:
 pn.extension(raw_css=[CSS])
 
 
-# In[2]:
+# In[26]:
 
 
 markdown_text = """
@@ -240,7 +239,7 @@ That is so funny! 😂
 """
 
 
-# In[23]:
+# In[27]:
 
 
 recipe = """
@@ -262,7 +261,7 @@ recipe = """
 """
 
 
-# In[19]:
+# In[28]:
 
 
 row = pn.Row(
@@ -273,7 +272,7 @@ row = pn.Row(
 )
 
 
-# In[14]:
+# In[29]:
 
 
 content = {
