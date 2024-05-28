@@ -1,7 +1,7 @@
 {
-  "name": "demo",
-  "short_name": "demo",
-  "start_url": "index.html",
+  "name": "Dashboard",
+  "short_name": "Dashboard",
+  "start_url": "app.html",
   "icons": [
     {
       "src": "images/icon-vector.svg",
